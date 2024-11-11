@@ -1,3 +1,4 @@
+import random
 class QuizBrain:
     def __init__(self, questions_list):
         self.question_number = 0
@@ -8,9 +9,17 @@ class QuizBrain:
         print(f"Current Score: {self.score}")
         print(f"Questions remaining: {len(self.questions_list) - self.question_number}")
         current_question = self.questions_list[self.question_number]
+        four_choices = []
+        four_choices.append(current_question.answer)
+        four_choices.extend(current_question.options)
+        random.shuffle(four_choices)
+        user_answer = input(f"Q.{self.question_number + 1}: {current_question.text} 1 pt (type out answer): " + "\n"
+                            f"A. {four_choices[0]}" + "\n"
+                            f"B. {four_choices[1]}" + "\n"
+                            f"C. {four_choices[2]}" + "\n"
+                            f"D. {four_choices[3]}" + "\n")
 
-        user_answer = input(f"Q.{self.question_number + 1}: {current_question.text} 1 pt (true/false): ")
-        self.check_answer(user_answer, current_question.answer, current_question.score)
+        self.check_answer(user_answer, current_question.answer, 1)
     def still_has_questions(self):
         return self.question_number < len(self.questions_list)
 
@@ -20,7 +29,7 @@ class QuizBrain:
             self.score += score
             self.total += 1
         else:
-            print(f"Incorrect! '{answer}' was what we were looking for.")
+            print(f"Incorrect! '{answer}' was what we were looking for." + "\n")
             self.total += 1
 
         total_score = round((self.score / self.total)*100, 2)
