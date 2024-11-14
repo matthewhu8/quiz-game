@@ -16,5 +16,5 @@ while quiz.still_has_questions():
     quiz.next_question()
     quiz.question_number += 1
 
-print ("You've completed the quiz")
-print (f"Your final score: {round((quiz.score/quiz.question_number)*100, 2)}%")
+print("You've completed the quiz")
+print(f"Your final score: {round((quiz.score/quiz.question_number)*100, 2)}%")
